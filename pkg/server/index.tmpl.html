@@ -133,7 +133,7 @@
       </tr>
       <tr>
         <td class="last">
-          <span class="big" id="ipAddr">{{ .reqRemoteAddr }}</span>
+          <span class="big" id="ipAddr">{{ .RemoteAddr }}</span>
         </td>
       </tr>
     </table>
@@ -149,10 +149,9 @@
       <tr>
         <td class="last" id="headers">
           <span>
-            {{ .reqMethod }} / {{ .reqProto }} <br>
-            {{range .header }}
-            ---
-            {{.key}}: {{.value}}
+            {{ .Method }} / {{ .Proto }} <br>
+            {{range $key, $value := .Header }}
+            {{$key}}: {{$value}}<br>
             {{ end }}
           </span>
         </td>
@@ -160,9 +159,9 @@
     </table>
     <br><br>
     <details>
-    <summary>Other Endpoints</summary>
-    <div markdown="1">
-    * 
+    <summary>Addt'l Endpoints</summary>
+    <div>
+    <a href="/ip">/ip</a>
     </div>
   </details>
   </main>
