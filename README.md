@@ -32,7 +32,7 @@ Also provides links to localhost (`127.0.0.1`, `[::1]`) for easy navigation to l
 * ipv4+ipv6 localhost links
   * Quick links for port 80
   * Customizable port number
-* Webpage < `6kB`, Binary < `10MB`, Docker image < `13MB`
+* Webpage < `7kB`, Binary < `10MB`, Docker image < `13MB`
 
 ## Technical Overview
 
