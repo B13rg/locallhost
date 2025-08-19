@@ -9,7 +9,7 @@ import (
 
 func respIndex(w http.ResponseWriter, req *http.Request) {
 	var tmplFile = "index.tmpl.html"
-	tmpl, err := template.New(tmplFile).Parse(IndexTemplateString)
+	tmpl, err := template.New(tmplFile).Parse(indexTemplateString)
 	if err != nil {
 		fmt.Fprintf(w, "Error parsing template\n")
 		return

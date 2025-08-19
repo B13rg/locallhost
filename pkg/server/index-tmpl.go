@@ -1,6 +1,6 @@
 package server
 
-var IndexTemplateString = `<!DOCTYPE html>
+var indexTemplateString = `<!DOCTYPE html>
 <!-- Based on http://locallhost.com/ - &copy; 2004-2025 Tom Anderson-->
 <html>
 
@@ -41,6 +41,7 @@ var IndexTemplateString = `<!DOCTYPE html>
     table {
       background-color: #121212;
       border: 0;
+      overflow-wrap: anywhere;
       width: 15%;
       min-width: fit-content;
       margin-left: auto;
@@ -70,13 +71,23 @@ var IndexTemplateString = `<!DOCTYPE html>
     .big {
       font-size: 22px;
     }
-
+    .first {
+      padding-top: 0.5em;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
     .last {
       padding-bottom: 0.5em;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
     }
 
     .center {
       text-align: center;
+    }
+    
+    .left {
+      text-align: left;
     }
 
     :link,
@@ -134,7 +145,7 @@ var IndexTemplateString = `<!DOCTYPE html>
         </td>
       </tr>
       <tr>
-        <td class="last">
+        <td class="first last">
           <span class="big" id="ipAddr">{{ .RemoteAddr }}</span>
         </td>
       </tr>
@@ -149,9 +160,9 @@ var IndexTemplateString = `<!DOCTYPE html>
         </td>
       </tr>
       <tr>
-        <td class="last" id="headers">
+        <td class="last left" id="headers">
           <span>
-            {{ .Method }} / {{ .Proto }} <br>
+            {{ .Method }} / {{ .Proto }} <br><br>
             {{range $key, $value := .Header }}
             {{$key}}: {{$value}}<br>
             {{ end }}
@@ -160,12 +171,10 @@ var IndexTemplateString = `<!DOCTYPE html>
       </tr>
     </table>
     <br><br>
-    <details>
-    <summary>Addt'l Endpoints</summary>
     <div>
-    <a href="/ip">/ip</a>
+    Addt'l Endpoints
+    <li><a href="/ip">/ip</a></li>
     </div>
-  </details>
   </main>
   <!-- footer -->
   <footer>
