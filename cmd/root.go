@@ -7,12 +7,9 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"path/filepath"
-	"runtime"
-	"runtime/pprof"
 	"strings"
 
-	"github.com/b13rg/locallhost/pkg/server"
+	"github.com/B13rg/locallhost/pkg/server"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -35,7 +32,7 @@ var RootCmd = &cobra.Command{
 
 		logInterfaces(port)
 
-		server.Serve(port)
+		log.Fatal().Err(server.Serve(port)).Msg("server encountered error")
 	},
 }
 
@@ -81,10 +78,6 @@ type CmdRootOptions struct {
 	LogLevel string
 	// enable colorized output (default true). Set to false to disable")
 	Color bool
-	// Profiling output directory.  Only captured if set.
-	ProfilingDir string
-	// CPU profiling output file handle.
-	ProfilingCPUFile *os.File
 	// HTTP port to listen on
 	Port int
 }
@@ -93,8 +86,7 @@ var RootConfig CmdRootOptions
 
 func init() {
 	// Ran before each command is ran
-	cobra.OnInitialize(InitConfig, ProfilingInitializer)
-	cobra.OnFinalize(ProfilingFinalizer)
+	cobra.OnInitialize(InitConfig)
 
 	RootCmd.PersistentFlags().BoolVar(&RootConfig.Debug,
 		"debug", false,
@@ -105,9 +97,6 @@ func init() {
 	RootCmd.PersistentFlags().BoolVar(&RootConfig.Color,
 		"color", true,
 		"enable colorized output")
-	RootCmd.PersistentFlags().StringVarP(&RootConfig.ProfilingDir,
-		"profiledir", "", "",
-		"directory to write pprof profile data to")
 	//nolint:mnd
 	RootCmd.PersistentFlags().IntVarP(&RootConfig.Port,
 		"port", "p", 8080,
@@ -128,44 +117,5 @@ func InitConfig() {
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		log.Debug().Msg("Using config file:" + viper.ConfigFileUsed())
-	}
-}
-
-// Stop profiling and write cpu and memory profiling files if configured.
-func ProfilingFinalizer() {
-	if RootConfig.ProfilingDir != "" {
-		pprof.StopCPUProfile()
-		if RootConfig.ProfilingCPUFile != nil {
-			_ = RootConfig.ProfilingCPUFile.Close()
-		}
-
-		runtime.GC() // get up-to-date statistics
-
-		// Various types of profiles that can be collected:
-		// https://cs.opensource.google/go/go/+/go1.24.2:src/runtime/pprof/pprof.go;l=178
-		var err error
-		heapFile, err := os.Create(filepath.Join(RootConfig.ProfilingDir, "profile_heap.pb.gz"))
-		if err != nil {
-			log.Fatal().Err(err).Msg("could not write memory profile: ")
-		}
-		if err = pprof.WriteHeapProfile(heapFile); err != nil {
-			_ = heapFile.Close()
-			log.Fatal().Err(err).Msg("could not write memory profile: ")
-		}
-		_ = heapFile.Close()
-	}
-}
-
-// Sets up program profiling.
-func ProfilingInitializer() {
-	var err error
-	if RootConfig.ProfilingDir != "" {
-		RootConfig.ProfilingCPUFile, err = os.Create(filepath.Join(RootConfig.ProfilingDir, "profile_cpu.pb.gz"))
-		if err != nil {
-			log.Fatal().Err(err).Msg("could not create CPU profile: ")
-		}
-		if err := pprof.StartCPUProfile(RootConfig.ProfilingCPUFile); err != nil {
-			log.Fatal().Err(err).Msg("could not create CPU profile: ")
-		}
 	}
 }

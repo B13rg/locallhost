@@ -1,7 +1,7 @@
 # cmd
 
 ```go
-import "github.com/b13rg/locallhost/cmd"
+import "github.com/B13rg/locallhost/cmd"
 ```
 
 Defines the cli\-interface commands available to the user.
@@ -13,8 +13,6 @@ Defines the cli\-interface commands available to the user.
 - [func ConfigureLogger\(debug bool\)](<#ConfigureLogger>)
 - [func Execute\(ver string\)](<#Execute>)
 - [func InitConfig\(\)](<#InitConfig>)
-- [func ProfilingFinalizer\(\)](<#ProfilingFinalizer>)
-- [func ProfilingInitializer\(\)](<#ProfilingInitializer>)
 - [func SetupLogger\(enableColor bool\) zerolog.Logger](<#SetupLogger>)
 - [type CmdRootOptions](<#CmdRootOptions>)
 - [type Stamp](<#Stamp>)
@@ -38,7 +36,7 @@ var RootCmd = &cobra.Command{
 
         logInterfaces(port)
 
-        server.Serve(port)
+        log.Fatal().Err(server.Serve(port)).Msg("server encountered error")
     },
 }
 ```
@@ -88,7 +86,7 @@ func ConfigureLogger(debug bool)
 
 
 <a name="Execute"></a>
-## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L68>)
+## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L65>)
 
 ```go
 func Execute(ver string)
@@ -97,31 +95,13 @@ func Execute(ver string)
 Execute adds all child commands to the root command sets flags appropriately. This is called by main.main\(\). It only needs to happen once to the rootCmd.
 
 <a name="InitConfig"></a>
-## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L119>)
+## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L108>)
 
 ```go
 func InitConfig()
 ```
 
 InitConfig reads in config file and ENV variables if set.
-
-<a name="ProfilingFinalizer"></a>
-## func [ProfilingFinalizer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L135>)
-
-```go
-func ProfilingFinalizer()
-```
-
-Stop profiling and write cpu and memory profiling files if configured.
-
-<a name="ProfilingInitializer"></a>
-## func [ProfilingInitializer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L160>)
-
-```go
-func ProfilingInitializer()
-```
-
-Sets up program profiling.
 
 <a name="SetupLogger"></a>
 ## func [SetupLogger](<https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L38>)
@@ -133,7 +113,7 @@ func SetupLogger(enableColor bool) zerolog.Logger
 Configure zerolog with some defaults and cleanup error formatting.
 
 <a name="CmdRootOptions"></a>
-## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L77-L90>)
+## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L74-L83>)
 
 Default options that are available to all commands.
 
@@ -145,10 +125,6 @@ type CmdRootOptions struct {
     LogLevel string
     // enable colorized output (default true). Set to false to disable")
     Color bool
-    // Profiling output directory.  Only captured if set.
-    ProfilingDir string
-    // CPU profiling output file handle.
-    ProfilingCPUFile *os.File
     // HTTP port to listen on
     Port int
 }

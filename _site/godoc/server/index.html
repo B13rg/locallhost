@@ -92,7 +92,7 @@
           <li class="breadcrumb-item">Godocs</li>
       <li class="breadcrumb-item active">server</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/b13rg/locallhost/blob/main/docs/godoc/server.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/B13rg/locallhost/blob/main/docs/godoc/server.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -101,12 +101,12 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="server">server</h1>
-<pre><code class="language-go">import &quot;github.com/b13rg/locallhost/pkg/server&quot;
+<pre><code class="language-go">import &quot;github.com/B13rg/locallhost/pkg/server&quot;
 </code></pre>
 <h2 id="index">Index</h2>
 <ul>
 <li><a href="#IndexTemplateString">func IndexTemplateString() string</a></li>
-<li><a href="#Serve">func Serve(port int)</a></li>
+<li><a href="#Serve">func Serve(port int) error</a></li>
 <li><a href="#RequestResponse">type RequestResponse</a></li>
 <li><a href="#ExtractRequestData">func ExtractRequestData(req *http.Request) *RequestResponse</a></li>
 </ul>
@@ -116,8 +116,8 @@
 </code></pre>
 <p>Returns the html template string for the index page.</p>
 <p><a name="Serve"></a></p>
-<h2 id="func-serve">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L76">Serve</a></h2>
-<pre><code class="language-go">func Serve(port int)
+<h2 id="func-serve">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L74">Serve</a></h2>
+<pre><code class="language-go">func Serve(port int) error
 </code></pre>
 <p>Start serving on specified port.</p>
 <p><a name="RequestResponse"></a></p>
@@ -139,7 +139,7 @@
 }
 </code></pre>
 <p><a name="ExtractRequestData"></a></p>
-<h3 id="func-extractrequestdata">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L48">ExtractRequestData</a></h3>
+<h3 id="func-extractrequestdata">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L46">ExtractRequestData</a></h3>
 <pre><code class="language-go">func ExtractRequestData(req *http.Request) *RequestResponse
 </code></pre>
               
@@ -169,7 +169,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
         <span>
-          <a href="https://github.com/b13rg/locallhost/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/B13rg/locallhost/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
     

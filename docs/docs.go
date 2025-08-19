@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	cmd "github.com/b13rg/locallhost/cmd"
+	cmd "github.com/B13rg/locallhost/cmd"
 	"github.com/invopop/jsonschema"
 	"github.com/princjef/gomarkdoc"
 	"github.com/princjef/gomarkdoc/lang"

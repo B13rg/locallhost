@@ -8,8 +8,6 @@ import (
 	"slices"
 	"strconv"
 	"strings"
-
-	"github.com/rs/zerolog/log"
 )
 
 func respIndex(writer http.ResponseWriter, req *http.Request) {
@@ -73,11 +71,11 @@ func respJson(w http.ResponseWriter, req *http.Request) {
 }
 
 // Start serving on specified port.
-func Serve(port int) {
+func Serve(port int) error {
 	http.HandleFunc("/", respIndex)
 	http.HandleFunc("/ip", respIP)
 	http.HandleFunc("/json", respJson)
 
 	//nolint:gosec
-	log.Fatal().Err(http.ListenAndServe(":"+strconv.Itoa(port), nil)).Msg("Server encountered error")
+	return http.ListenAndServe(":"+strconv.Itoa(port), nil)
 }

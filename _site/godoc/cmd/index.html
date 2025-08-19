@@ -70,10 +70,6 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#func-initconfig">func InitConfig</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#func-profilingfinalizer">func ProfilingFinalizer</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#func-profilinginitializer">func ProfilingInitializer</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#func-setuplogger">func SetupLogger</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#type-cmdrootoptions">type CmdRootOptions</a>
@@ -102,7 +98,7 @@
           <li class="breadcrumb-item">Godocs</li>
       <li class="breadcrumb-item active">cmd</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/b13rg/locallhost/blob/main/docs/godoc/cmd.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/B13rg/locallhost/blob/main/docs/godoc/cmd.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -111,7 +107,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="cmd">cmd</h1>
-<pre><code class="language-go">import &quot;github.com/b13rg/locallhost/cmd&quot;
+<pre><code class="language-go">import &quot;github.com/B13rg/locallhost/cmd&quot;
 </code></pre>
 <p>Defines the cli-interface commands available to the user.</p>
 <h2 id="index">Index</h2>
@@ -121,8 +117,6 @@
 <li><a href="#ConfigureLogger">func ConfigureLogger(debug bool)</a></li>
 <li><a href="#Execute">func Execute(ver string)</a></li>
 <li><a href="#InitConfig">func InitConfig()</a></li>
-<li><a href="#ProfilingFinalizer">func ProfilingFinalizer()</a></li>
-<li><a href="#ProfilingInitializer">func ProfilingInitializer()</a></li>
 <li><a href="#SetupLogger">func SetupLogger(enableColor bool) zerolog.Logger</a></li>
 <li><a href="#CmdRootOptions">type CmdRootOptions</a></li>
 <li><a href="#Stamp">type Stamp</a></li>
@@ -142,7 +136,7 @@
 
         logInterfaces(port)
 
-        server.Serve(port)
+        log.Fatal().Err(server.Serve(port)).Msg(&quot;server encountered error&quot;)
     },
 }
 </code></pre>
@@ -179,32 +173,22 @@
 <pre><code class="language-go">func ConfigureLogger(debug bool)
 </code></pre>
 <p><a name="Execute"></a></p>
-<h2 id="func-execute">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L68">Execute</a></h2>
+<h2 id="func-execute">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L65">Execute</a></h2>
 <pre><code class="language-go">func Execute(ver string)
 </code></pre>
 <p>Execute adds all child commands to the root command sets flags appropriately. This is called by main.main(). It only needs to happen once to the rootCmd.</p>
 <p><a name="InitConfig"></a></p>
-<h2 id="func-initconfig">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L119">InitConfig</a></h2>
+<h2 id="func-initconfig">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L108">InitConfig</a></h2>
 <pre><code class="language-go">func InitConfig()
 </code></pre>
 <p>InitConfig reads in config file and ENV variables if set.</p>
-<p><a name="ProfilingFinalizer"></a></p>
-<h2 id="func-profilingfinalizer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L135">ProfilingFinalizer</a></h2>
-<pre><code class="language-go">func ProfilingFinalizer()
-</code></pre>
-<p>Stop profiling and write cpu and memory profiling files if configured.</p>
-<p><a name="ProfilingInitializer"></a></p>
-<h2 id="func-profilinginitializer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L160">ProfilingInitializer</a></h2>
-<pre><code class="language-go">func ProfilingInitializer()
-</code></pre>
-<p>Sets up program profiling.</p>
 <p><a name="SetupLogger"></a></p>
 <h2 id="func-setuplogger">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L38">SetupLogger</a></h2>
 <pre><code class="language-go">func SetupLogger(enableColor bool) zerolog.Logger
 </code></pre>
 <p>Configure zerolog with some defaults and cleanup error formatting.</p>
 <p><a name="CmdRootOptions"></a></p>
-<h2 id="type-cmdrootoptions">type <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L77-L90">CmdRootOptions</a></h2>
+<h2 id="type-cmdrootoptions">type <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L74-L83">CmdRootOptions</a></h2>
 <p>Default options that are available to all commands.</p>
 <pre><code class="language-go">type CmdRootOptions struct {
     // log more information about what the tool is doing. Overrides --loglevel
@@ -213,10 +197,6 @@
     LogLevel string
     // enable colorized output (default true). Set to false to disable&quot;)
     Color bool
-    // Profiling output directory.  Only captured if set.
-    ProfilingDir string
-    // CPU profiling output file handle.
-    ProfilingCPUFile *os.File
     // HTTP port to listen on
     Port int
 }
@@ -263,7 +243,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
         <span>
-          <a href="https://github.com/b13rg/locallhost/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/B13rg/locallhost/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
     

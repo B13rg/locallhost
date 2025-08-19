@@ -1,6 +1,6 @@
 services:
   locallhost:
-    image: ghcr.io/b13rg/locallhost:latest
+    image: ghcr.io/B13rg/locallhost:latest
     build:
       context: ../
       dockerfile: ./docker/Dockerfile

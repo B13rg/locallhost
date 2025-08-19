@@ -22,6 +22,7 @@ type RequestResponse struct {
 //
 //nolint:funlen
 func IndexTemplateString() string {
+	//
 	cssStyle := `<style type="text/css">
     body {
       background-color: #121212;
@@ -147,17 +148,18 @@ func IndexTemplateString() string {
 	// https://yoksel.github.io/url-encoder/ ->
 	faviconSVG := "%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' fill='%238ae234' viewBox='0 -1 20 20'%3E%3Cpath fill='%238ae234' fill-rule='evenodd' d='M8 4h4V0H8v4Zm0 14h4v-4H8v4Zm8 0h4v-4h-4v4ZM0 18h4v-4H0v4Zm3-6H1V8h8V6h2v2h8v4h-2v-2h-6v2H9v-2H3v2Z'/%3E%3C/svg%3E"
 
-	head := `<title>locallhost</title>
+	head := `
+  <title>locallhost</title>
   <meta name="keywords" content="localhost, software, ip address, ip addresses, ip, http header, golang, host, tools">
   <meta charset="UTF-8">
   <meta name="description" content="locallhost linker">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,` + faviconSVG + `" />
-  ` +
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,` + faviconSVG + `" />` +
 		cssStyle +
 		javaScript
 
-	body := `<body class="center">
+	body := `
+  <body class="center">
   <main>
     <span class="small">Perhaps you intended to go here:</span><br>
     <span class="big">
@@ -226,7 +228,7 @@ func IndexTemplateString() string {
         </td>
       </tr>
     </table>
-    <br><br>
+    <br>
     <div>
     Addt'l Endpoints
     <li><a href="/ip">/ip</a></li>
@@ -244,7 +246,7 @@ func IndexTemplateString() string {
   </footer>
 </body>`
 
-	return `<!DOCTYPE html>
+	finalDoc := `<!DOCTYPE html>
 <!-- Based on http://locallhost.com/ - &copy; 2004-2025 Tom Anderson-->
 <html> 
 <head>` +
@@ -252,4 +254,5 @@ func IndexTemplateString() string {
 		`</head>` +
 		body +
 		`</html>`
+	return finalDoc
 }
