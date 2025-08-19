@@ -3,18 +3,18 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 	"slices"
 	"strconv"
 	"strings"
-	"text/template"
 )
 
 func respIndex(w http.ResponseWriter, req *http.Request) {
 	var tmplFile = "index.tmpl.html"
-	tmpl, err := template.New(tmplFile).Parse(indexTemplateString)
+	tmpl, err := template.New(tmplFile).Parse(IndexTemplateString())
 	if err != nil {
-		fmt.Fprintf(w, "Error parsing template\n")
+		fmt.Fprintf(w, "Error parsing template: %v\n", err)
 		return
 	}
 
@@ -22,7 +22,7 @@ func respIndex(w http.ResponseWriter, req *http.Request) {
 
 	err = tmpl.Execute(w, reqData)
 	if err != nil {
-		fmt.Fprintf(w, "Error executing template\n")
+		fmt.Fprintf(w, "Error executing template: %v\n", err)
 		return
 	}
 	// for name, headers := range req.Header {
@@ -54,6 +54,7 @@ func ExtractRequestData(req *http.Request) *RequestResponse {
 		RemotePort: remotePort,
 		Method:     req.Method,
 		Proto:      req.Proto,
+		Host:       req.Host,
 		Header:     req.Header,
 	}
 }

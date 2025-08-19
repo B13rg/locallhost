@@ -8,6 +8,8 @@ type RequestResponse struct {
 	RemoteAddr string
 	// Port of the remote client
 	RemotePort string
+	// Host header
+	Host string
 	// Request method
 	Method string
 	// Request protocol
@@ -16,18 +18,10 @@ type RequestResponse struct {
 	Header http.Header
 }
 
-var indexTemplateString = `<!DOCTYPE html>
-<!-- Based on http://locallhost.com/ - &copy; 2004-2025 Tom Anderson-->
-<html>
+// Returns the html template string for the index page
+func IndexTemplateString() string {
 
-<head>
-  <title>locallhost</title>
-  <meta name="keywords" content="localhost, software, ip address, ip addresses, ip, http header, golang, host, tools">
-  <meta charset="UTF-8">
-  <meta name="description" content="locallhost linker">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style type="text/css">
+	cssStyle := `<style type="text/css">
     body {
       background-color: #121212;
       color: #e0e0e0;
@@ -111,29 +105,52 @@ var indexTemplateString = `<!DOCTYPE html>
       text-decoration: none;
       color: #81d4fa
     }
-  </style>
-  <script>
+  </style>`
+
+	javaScript := `<script>
     function genLink() {
       const port = document.getElementById("portInput").value;
       const linkTextV4 = "http://127.0.0.1:"+port;
       const linkTextV6 = "http://[::1]:"+port;
       document.getElementById("linkResult").innerHTML =
-        '<a href="'+linkTextV4+'" target="_blank" style="color: #00db54;">'+linkTextV4+'</a><br>
-        <a href="${linkTextV6}" target="_blank" style="color: #00db54;">'+linkTextV6+'</a>';
+        '<a href="'+linkTextV4+'" target="_blank" style="color: #00db54;">'+linkTextV4+'</a><br>'+
+        '<a href="${linkTextV6}" target="_blank" style="color: #00db54;">'+linkTextV6+'</a>';
     }
     function copyText(elementID) {
       // Get the text field
       var copyText = document.getElementById(elementID);
-      // Copy the text inside the text field
-      navigator.clipboard.writeText(copyText.innerText);
+      if (window.isSecureContext) {
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.innerText);
+      } else {
+        console.log("can't copy; insecure context")
+      }
       // Log the copied text
       console.log(elementID + ":", copyText.innerText);
     }
-    window.onload = genLink;
-  </script>
-</head>
 
-<body class="center">
+    function checkContext() {
+      if (!window.isSecureContext) {
+        document.querySelectorAll('.copyButt').forEach(function(el) {
+          el.style.display = 'none';
+        });
+      }
+
+      genLink();
+    }
+    window.onload = checkContext;
+  </script>`
+
+	head := `<title>locallhost</title>
+  <meta name="keywords" content="localhost, software, ip address, ip addresses, ip, http header, golang, host, tools">
+  <meta charset="UTF-8">
+  <meta name="description" content="locallhost linker">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ` +
+		cssStyle +
+		javaScript
+
+	body := `<body class="center">
   <main>
     <span class="small">Perhaps you intended to go here:</span><br>
     <span class="big">
@@ -159,15 +176,14 @@ var indexTemplateString = `<!DOCTYPE html>
         </td>
       </tr>
       <tr>
-        <td class="first last">
+        <td class='first last'>
           <span class="big" id="ipAddr">{{ .RemoteAddr }}</span>
           &nbsp;
-          <button onclick="copyText("ipAddr")">Copy</button>
+          <button class="copyButt" onclick="copyText('ipAddr')">Copy</button>
           <br>
-          <br>
-          <span class="big" id="port">Port: {{ .RemotePort }}</span>
+          <span id="port">Port: {{ .RemotePort }}</span>
           &nbsp;
-          <button onclick="copyText("port")">Copy</button>
+          <button class="copyButt" onclick="copyText('port')">Copy</button>
         </td>
       </tr>
     </table>
@@ -177,16 +193,28 @@ var indexTemplateString = `<!DOCTYPE html>
       <tr>
         <td style="background-color: #0040b0;" class="title">
           Your HTTP Request Header &nbsp;
-          <button onclick="copyText("headers")">Copy</button>
+          <button class="copyButt" onclick="copyText('headers')">Copy</button>
         </td>
       </tr>
       <tr>
         <td class="last left" id="headers">
           <span>
             {{ .Method }} / {{ .Proto }} <br><br>
-            {{range $key, $value := .Header }}
-            {{$key}}: {{$value}}<br>
-            {{ end }}
+            Host: {{ .Host }}<br>
+            {{- if  index .Header "User-Agent" }}
+            User-Agent: {{ index (index .Header "User-Agent") 0 }}<br>
+            {{- end }}
+            <br>
+            {{- range $key, $value := .Header }}
+            {{- if eq $key "User-Agent" }}
+            {{- continue }}
+            {{- end }}
+            {{- if gt (len $value) 1 }}
+            {{ $key }}: {{ $value }}<br>
+            {{- else }}
+            {{ $key }}: {{ index $value 0}}<br>
+            {{- end }}
+            {{- end }}
           </span>
         </td>
       </tr>
@@ -207,6 +235,14 @@ var indexTemplateString = `<!DOCTYPE html>
       <br>
     </p>
   </footer>
-</body>
+</body>`
 
-</html>`
+	return `<!DOCTYPE html>
+<!-- Based on http://locallhost.com/ - &copy; 2004-2025 Tom Anderson-->
+<html> 
+<head>` +
+		head +
+		`</head>` +
+		body +
+		`</html>`
+}
