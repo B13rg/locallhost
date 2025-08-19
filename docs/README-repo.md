@@ -1,6 +1,8 @@
 # locallhost
 
-A template repo for a Golang Project.
+A simple http server that echoes client http request information.
+Also provides links to localhost (`127.0.0.1`, `[::1]`) for easy navigation to locally hosted projects.
+
 <details>
 <summary><b>Table of Contents</b></summary>
 <p>
@@ -14,13 +16,8 @@ A template repo for a Golang Project.
     - [Deployment](#deployment)
   - [Documentation and Additional Resources](#documentation-and-additional-resources)
     - [Links](#links)
-    - [Other Docs](#other-docs)
     - [History](#history)
-    - [Alternatives](#alternatives)
   - [Development](#development)
-    - [Setup](#setup)
-    - [Tests](#tests)
-    - [Build Troubleshooting](#build-troubleshooting)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -29,7 +26,13 @@ A template repo for a Golang Project.
 
 ## Key Features
 
+* 
+
 ## Technical Overview
+
+Uses Golang's `net/http` and `` packages to display request info.
+
+* 
 
 ## Installation
 
@@ -43,19 +46,10 @@ A template repo for a Golang Project.
 
 ### Links
 
-### Other Docs
-
 ### History
-
-### Alternatives
 
 ## Development
 
-### Setup
-
-### Tests
-
-### Build Troubleshooting
 
 ## Contributing
 
