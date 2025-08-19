@@ -36,7 +36,7 @@ Also provides links to localhost (`127.0.0.1`, `[::1]`) for easy navigation to l
 
 ## Technical Overview
 
-Uses Golang's `net/http` and `` packages to display request info.
+Uses Golang's `net/http` and `html/template` packages to display request info.
 
 ## Installation
 
