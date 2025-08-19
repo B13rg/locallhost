@@ -1,0 +1,8 @@
+services:
+  locallhost:
+    image: ghcr.io/b13rg/locallhost:latest
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 8080:8080
