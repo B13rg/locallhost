@@ -41,7 +41,7 @@ Uses Golang's `net/http` and `html/template` packages to display request info.
 ## Installation
 
 ```
-go install https://github.com/B13rg/locallhost.git@main
+go install -v github.com/B13rg/locallhost@main
 ```
 
 ## Getting Started
