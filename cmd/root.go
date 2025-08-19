@@ -1,7 +1,6 @@
 // Defines the cli-interface commands available to the user.
 //
 //nolint:gochecknoinits,gochecknoglobals
-
 package cmd
 
 import (
@@ -40,9 +39,8 @@ var RootCmd = &cobra.Command{
 	},
 }
 
-// Log interfaces tool will be serving on
+// Log interfaces tool will be serving on.
 func logInterfaces(port int) {
-
 	interfaces, err := net.Interfaces()
 	if err != nil {
 		log.Fatal().Err(err).Msg("error fetching interfaces")
@@ -110,6 +108,7 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&RootConfig.ProfilingDir,
 		"profiledir", "", "",
 		"directory to write pprof profile data to")
+	//nolint:mnd
 	RootCmd.PersistentFlags().IntVarP(&RootConfig.Port,
 		"port", "p", 8080,
 		"Set http port for server to listen on",
