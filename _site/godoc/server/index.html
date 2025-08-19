@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="B13rg" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>types - Tool Docs</title>
+    <title>server - Tool Docs</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "types";
-        var mkdocs_page_input_path = "godoc/types.md";
+        var mkdocs_page_name = "server";
+        var mkdocs_page_input_path = "godoc/server.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -47,9 +47,24 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../README-repo/">Repo Readme</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Godocs</span></p>
+              <p class="caption"><span class="caption-text">Commands</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="" href="../cmd.md">cmd</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/locallhost/">root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/locallhost_version/">version</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Godocs</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../cmd/">cmd</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">server</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#index">Index</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-serve">func Serve</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -66,9 +81,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">types</li>
+          <li class="breadcrumb-item">Godocs</li>
+      <li class="breadcrumb-item active">server</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/b13rg/template-golang/blob/main/docs/godoc/types.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/b13rg/locallhost/blob/main/docs/godoc/server.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -76,14 +92,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="types">types</h1>
-<pre><code class="language-go">import &quot;github.com/b13rg/template-golang/pkg/types&quot;
+                <h1 id="server">server</h1>
+<pre><code class="language-go">import &quot;github.com/b13rg/locallhost/pkg/server&quot;
 </code></pre>
-<p>Place external shared types here.</p>
 <h2 id="index">Index</h2>
+<ul>
+<li><a href="#Serve">func Serve(port int)</a></li>
+</ul>
+<p><a name="Serve"></a></p>
+<h2 id="func-serve">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L35">Serve</a></h2>
+<pre><code class="language-go">func Serve(port int)
+</code></pre>
+<p>Start serving on specified port. If port is \&lt;= 0, defaults to 8080.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../cmd/" class="btn btn-neutral float-left" title="cmd"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -105,9 +131,11 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
         <span>
-          <a href="https://github.com/b13rg/template-golang/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/b13rg/locallhost/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
+    
+      <span><a href="../cmd/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

@@ -13,7 +13,7 @@
       <script>
         // Current page data
         var mkdocs_page_name = "cmd";
-        var mkdocs_page_input_path = "godoc/tool-cmd.md";
+        var mkdocs_page_input_path = "godoc/cmd.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -47,9 +47,42 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../README-repo/">Repo Readme</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Godocs</span></p>
+              <p class="caption"><span class="caption-text">Commands</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="" href="../cmd.md">cmd</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/locallhost/">root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/locallhost_version/">version</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Godocs</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">cmd</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#index">Index</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-colorize">func Colorize</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-configurelogger">func ConfigureLogger</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-execute">func Execute</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-initconfig">func InitConfig</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-profilingfinalizer">func ProfilingFinalizer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-profilinginitializer">func ProfilingInitializer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#func-setuplogger">func SetupLogger</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#type-cmdrootoptions">type CmdRootOptions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#type-stamp">type Stamp</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../server/">server</a>
                   </li>
               </ul>
       </div>
@@ -66,9 +99,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Godocs</li>
       <li class="breadcrumb-item active">cmd</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/b13rg/template-golang/blob/main/docs/godoc/tool-cmd.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/b13rg/locallhost/blob/main/docs/godoc/cmd.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -77,7 +111,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="cmd">cmd</h1>
-<pre><code class="language-go">import &quot;github.com/b13rg/template-golang/cmd&quot;
+<pre><code class="language-go">import &quot;github.com/b13rg/locallhost/cmd&quot;
 </code></pre>
 <h2 id="index">Index</h2>
 <ul>
@@ -95,9 +129,12 @@
 <h2 id="variables">Variables</h2>
 <p><a name="RootCmd"></a>RootCmd represents the base command when called without any subcommands.</p>
 <pre><code class="language-go">var RootCmd = &amp;cobra.Command{
-    Use:   &quot;&quot;,
-    Short: &quot;Short desc&quot;,
-    Long:  `Long description`,
+    Use:   &quot;locallhost&quot;,
+    Short: &quot;Run locallhost server&quot;,
+    Long:  `Start a server on a configured port that returns info about https requests.`,
+    Run: func(cmd *cobra.Command, args []string) {
+        server.Serve(RootConfig.Port)
+    },
 }
 </code></pre>
 <p><a name="VersionCmd"></a>Print out versions of packages in use. Chore() - Updated manually.</p>
@@ -124,41 +161,41 @@
 }
 </code></pre>
 <p><a name="Colorize"></a></p>
-<h2 id="func-colorize">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/logging.go#L67">Colorize</a></h2>
+<h2 id="func-colorize">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L67">Colorize</a></h2>
 <pre><code class="language-go">func Colorize(input interface{}, colorNum int, disabled bool) string
 </code></pre>
 <p>Colorize function from zerolog console.go file to replicate their coloring functionality. Source: https://github.com/rs/zerolog/blob/a21d6107dcda23e36bc5cfd00ce8fdbe8f3ddc23/console.go#L389 Replicated here because it's a private function.</p>
 <p><a name="ConfigureLogger"></a></p>
-<h2 id="func-configurelogger">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/logging.go#L12">ConfigureLogger</a></h2>
+<h2 id="func-configurelogger">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L12">ConfigureLogger</a></h2>
 <pre><code class="language-go">func ConfigureLogger(debug bool)
 </code></pre>
 <p><a name="Execute"></a></p>
-<h2 id="func-execute">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/root.go#L31">Execute</a></h2>
+<h2 id="func-execute">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L35">Execute</a></h2>
 <pre><code class="language-go">func Execute(ver string)
 </code></pre>
 <p>Execute adds all child commands to the root command sets flags appropriately. This is called by main.main(). It only needs to happen once to the rootCmd.</p>
 <p><a name="InitConfig"></a></p>
-<h2 id="func-initconfig">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/root.go#L75">InitConfig</a></h2>
+<h2 id="func-initconfig">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L85">InitConfig</a></h2>
 <pre><code class="language-go">func InitConfig()
 </code></pre>
 <p>InitConfig reads in config file and ENV variables if set.</p>
 <p><a name="ProfilingFinalizer"></a></p>
-<h2 id="func-profilingfinalizer">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/root.go#L91">ProfilingFinalizer</a></h2>
+<h2 id="func-profilingfinalizer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L101">ProfilingFinalizer</a></h2>
 <pre><code class="language-go">func ProfilingFinalizer()
 </code></pre>
 <p>Stop profiling and write cpu and memory profiling files if configured.</p>
 <p><a name="ProfilingInitializer"></a></p>
-<h2 id="func-profilinginitializer">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/root.go#L116">ProfilingInitializer</a></h2>
+<h2 id="func-profilinginitializer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L126">ProfilingInitializer</a></h2>
 <pre><code class="language-go">func ProfilingInitializer()
 </code></pre>
 <p>Sets up program profiling.</p>
 <p><a name="SetupLogger"></a></p>
-<h2 id="func-setuplogger">func <a href="https://github.com:b13rg/template-golang/blob/main/cmd/logging.go#L38">SetupLogger</a></h2>
+<h2 id="func-setuplogger">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L38">SetupLogger</a></h2>
 <pre><code class="language-go">func SetupLogger(enableColor bool) zerolog.Logger
 </code></pre>
 <p>Configure zerolog with some defaults and cleanup error formatting.</p>
 <p><a name="CmdRootOptions"></a></p>
-<h2 id="type-cmdrootoptions">type <a href="https://github.com:b13rg/template-golang/blob/main/cmd/root.go#L40-L51">CmdRootOptions</a></h2>
+<h2 id="type-cmdrootoptions">type <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L44-L57">CmdRootOptions</a></h2>
 <p>Default options that are available to all commands.</p>
 <pre><code class="language-go">type CmdRootOptions struct {
     // log more information about what the tool is doing. Overrides --loglevel
@@ -171,13 +208,15 @@
     ProfilingDir string
     // CPU profiling output file handle.
     ProfilingCPUFile *os.File
+    // HTTP port to listen on
+    Port int
 }
 </code></pre>
 <p><a name="RootConfig"></a></p>
 <pre><code class="language-go">var RootConfig CmdRootOptions
 </code></pre>
 <p><a name="Stamp"></a></p>
-<h2 id="type-stamp">type <a href="https://github.com:b13rg/template-golang/blob/main/cmd/version.go#L14-L21">Stamp</a></h2>
+<h2 id="type-stamp">type <a href="https://github.com:b13rg/locallhost/blob/main/cmd/version.go#L14-L21">Stamp</a></h2>
 <pre><code class="language-go">type Stamp struct {
     InfoGoVersion  string
     InfoGoCompiler string
@@ -190,6 +229,10 @@
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../cmd/locallhost_version/" class="btn btn-neutral float-left" title="version"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../server/" class="btn btn-neutral float-right" title="server">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -211,10 +254,14 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
         <span>
-          <a href="https://github.com/b13rg/template-golang/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/b13rg/locallhost/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
     
+      <span><a href="../../cmd/locallhost_version/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../server/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

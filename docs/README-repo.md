@@ -1,11 +1,11 @@
-# template-golang
+# locallhost
 
 A template repo for a Golang Project.
 <details>
 <summary><b>Table of Contents</b></summary>
 <p>
 
-- [template-golang](#template-golang)
+- [locallhost](#locallhost)
   - [Key Features](#key-features)
   - [Technical Overview](#technical-overview)
   - [Installation](#installation)
