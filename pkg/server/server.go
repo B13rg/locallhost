@@ -30,6 +30,8 @@ func respIndex(writer http.ResponseWriter, req *http.Request) {
 }
 
 func parseAddress(remoteAddr string) (string, string) {
+	// remove brackets
+	remoteAddr = strings.ReplaceAll(strings.ReplaceAll(remoteAddr, "[", ""), "]", "")
 	addrParts := strings.Split(remoteAddr, ":")
 
 	// extract and remove port

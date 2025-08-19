@@ -193,6 +193,11 @@ func IndexTemplateString() string {
           <span id="port">Port: {{ .RemotePort }}</span>
           &nbsp;
           <button class="copyButt" onclick="copyText('port')">Copy</button>
+          <br>
+          <a href="https://ip.guide/{{ .RemoteAddr }}">
+            ip.guide
+            <svg width="16px" height="16px" viewBox="0 -2 24 24" style="cursor:pointer"><g stroke-width="2.1" stroke="#666" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></g></svg>
+          </a>
         </td>
       </tr>
     </table>
