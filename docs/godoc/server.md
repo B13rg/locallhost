@@ -13,7 +13,7 @@ import "github.com/B13rg/locallhost/pkg/server"
 
 
 <a name="IndexTemplateString"></a>
-## func [IndexTemplateString](<https://github.com:b13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L24>)
+## func [IndexTemplateString](<https://github.com:B13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L24>)
 
 ```go
 func IndexTemplateString() string
@@ -22,7 +22,7 @@ func IndexTemplateString() string
 Returns the html template string for the index page.
 
 <a name="Serve"></a>
-## func [Serve](<https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L74>)
+## func [Serve](<https://github.com:B13rg/locallhost/blob/main/pkg/server/server.go#L74>)
 
 ```go
 func Serve(port int) error
@@ -31,7 +31,7 @@ func Serve(port int) error
 Start serving on specified port.
 
 <a name="RequestResponse"></a>
-## type [RequestResponse](<https://github.com:b13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L6-L19>)
+## type [RequestResponse](<https://github.com:B13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L6-L19>)
 
 Contains the data extracted from the request and returned to the user.
 
@@ -53,7 +53,7 @@ type RequestResponse struct {
 ```
 
 <a name="ExtractRequestData"></a>
-### func [ExtractRequestData](<https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L46>)
+### func [ExtractRequestData](<https://github.com:B13rg/locallhost/blob/main/pkg/server/server.go#L46>)
 
 ```go
 func ExtractRequestData(req *http.Request) *RequestResponse

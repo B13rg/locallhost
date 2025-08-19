@@ -68,7 +68,7 @@ var VersionCmd = &cobra.Command{
 ```
 
 <a name="Colorize"></a>
-## func [Colorize](<https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L67>)
+## func [Colorize](<https://github.com:B13rg/locallhost/blob/main/cmd/logging.go#L67>)
 
 ```go
 func Colorize(input interface{}, colorNum int, disabled bool) string
@@ -77,7 +77,7 @@ func Colorize(input interface{}, colorNum int, disabled bool) string
 Colorize function from zerolog console.go file to replicate their coloring functionality. Source: https://github.com/rs/zerolog/blob/a21d6107dcda23e36bc5cfd00ce8fdbe8f3ddc23/console.go#L389 Replicated here because it's a private function.
 
 <a name="ConfigureLogger"></a>
-## func [ConfigureLogger](<https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L12>)
+## func [ConfigureLogger](<https://github.com:B13rg/locallhost/blob/main/cmd/logging.go#L12>)
 
 ```go
 func ConfigureLogger(debug bool)
@@ -86,7 +86,7 @@ func ConfigureLogger(debug bool)
 
 
 <a name="Execute"></a>
-## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L65>)
+## func [Execute](<https://github.com:B13rg/locallhost/blob/main/cmd/root.go#L65>)
 
 ```go
 func Execute(ver string)
@@ -95,7 +95,7 @@ func Execute(ver string)
 Execute adds all child commands to the root command sets flags appropriately. This is called by main.main\(\). It only needs to happen once to the rootCmd.
 
 <a name="InitConfig"></a>
-## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L108>)
+## func [InitConfig](<https://github.com:B13rg/locallhost/blob/main/cmd/root.go#L108>)
 
 ```go
 func InitConfig()
@@ -104,7 +104,7 @@ func InitConfig()
 InitConfig reads in config file and ENV variables if set.
 
 <a name="SetupLogger"></a>
-## func [SetupLogger](<https://github.com:b13rg/locallhost/blob/main/cmd/logging.go#L38>)
+## func [SetupLogger](<https://github.com:B13rg/locallhost/blob/main/cmd/logging.go#L38>)
 
 ```go
 func SetupLogger(enableColor bool) zerolog.Logger
@@ -113,7 +113,7 @@ func SetupLogger(enableColor bool) zerolog.Logger
 Configure zerolog with some defaults and cleanup error formatting.
 
 <a name="CmdRootOptions"></a>
-## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L74-L83>)
+## type [CmdRootOptions](<https://github.com:B13rg/locallhost/blob/main/cmd/root.go#L74-L83>)
 
 Default options that are available to all commands.
 
@@ -137,7 +137,7 @@ var RootConfig CmdRootOptions
 ```
 
 <a name="Stamp"></a>
-## type [Stamp](<https://github.com:b13rg/locallhost/blob/main/cmd/version.go#L14-L21>)
+## type [Stamp](<https://github.com:B13rg/locallhost/blob/main/cmd/version.go#L14-L21>)
 
 
 

@@ -57,7 +57,7 @@ func GenerateTypeSchemas() error {
 	}
 
 	reflector, err := GenerateReflector(
-		"github.com/b13rg/locallhost/pkg/types",
+		"github.com/B13rg/locallhost/pkg/types",
 		"../pkg/types",
 	)
 	if err != nil {
@@ -111,7 +111,7 @@ func GoMarkDoc() error {
 	}
 
 	repo := lang.Repo{
-		Remote:        "https://github.com:b13rg/locallhost",
+		Remote:        "https://github.com:B13rg/locallhost",
 		DefaultBranch: "main",
 		PathFromRoot:  "",
 	}
