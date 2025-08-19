@@ -72,3 +72,17 @@ tasks:
       - go tool pprof -png -output ./profiling/heap.png ./{{.TOOL}} ./profiling/profile_heap.pb.gz
       #- go tool pprof -http=0.0.0.0:8654 ./{{.TOOL}} ./profiling/profile_cpu.pb.gz
       #- go tool pprof -http=0.0.0.0:8654 ./{{.TOOL}} ./profiling/profile_heap.pb.gz
+
+  05_docker-compose-build:
+    desc: Build docker container
+    aliases:
+      - dcb
+    cmds:
+      - docker-compose -f ./docker/compose.yml build
+  
+  05_docker-compose-up:
+    desc: Build docker container
+    aliases:
+      - dcu
+    cmds:
+      - docker-compose -f ./docker/compose.yml up -d
