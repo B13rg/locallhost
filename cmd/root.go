@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"runtime/pprof"
 
+	"github.com/b13rg/locallhost/pkg/server"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -21,9 +22,12 @@ var version string
 
 // RootCmd represents the base command when called without any subcommands.
 var RootCmd = &cobra.Command{
-	Use:   "",
-	Short: "Short desc",
-	Long:  `Long description`,
+	Use:   "locallhost",
+	Short: "Run locallhost server",
+	Long:  `Start a server on a configured port that returns info about https requests.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		server.Serve(RootConfig.Port)
+	},
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
@@ -48,6 +52,8 @@ type CmdRootOptions struct {
 	ProfilingDir string
 	// CPU profiling output file handle.
 	ProfilingCPUFile *os.File
+	// HTTP port to listen on
+	Port int
 }
 
 var RootConfig CmdRootOptions
@@ -69,6 +75,10 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&RootConfig.ProfilingDir,
 		"profiledir", "", "",
 		"directory to write pprof profile data to")
+	RootCmd.PersistentFlags().IntVarP(&RootConfig.Port,
+		"port", "p", 8080,
+		"Set http port for server to listen on",
+	)
 }
 
 // InitConfig reads in config file and ENV variables if set.
