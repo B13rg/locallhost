@@ -1,5 +1,21 @@
 package server
 
+import "net/http"
+
+// Contains the data extracted from the request and returned to the user.
+type RequestResponse struct {
+	// IP address of the remote client
+	RemoteAddr string
+	// Port of the remote client
+	RemotePort string
+	// Request method
+	Method string
+	// Request protocol
+	Proto string
+	// Request headers
+	Header http.Header
+}
+
 var indexTemplateString = `<!DOCTYPE html>
 <!-- Based on http://locallhost.com/ - &copy; 2004-2025 Tom Anderson-->
 <html>
@@ -99,12 +115,11 @@ var indexTemplateString = `<!DOCTYPE html>
   <script>
     function genLink() {
       const port = document.getElementById("portInput").value;
-      const linkTextV4 = "http://127.0.0.1:${port}";
-      const linkTextV6 = "http://[::1]:${port}";
+      const linkTextV4 = "http://127.0.0.1:"+port;
+      const linkTextV6 = "http://[::1]:"+port;
       document.getElementById("linkResult").innerHTML =
-        "<a href="${linkTextV4}" target="_blank" style="color: #00db54;">${linkTextV4}</a>
-        <br>
-        <a href="${linkTextV6}" target="_blank" style="color: #00db54;">${linkTextV6}</a>";
+        '<a href="'+linkTextV4+'" target="_blank" style="color: #00db54;">'+linkTextV4+'</a><br>
+        <a href="${linkTextV6}" target="_blank" style="color: #00db54;">'+linkTextV6+'</a>';
     }
     function copyText(elementID) {
       // Get the text field
@@ -140,13 +155,19 @@ var indexTemplateString = `<!DOCTYPE html>
     <table>
       <tr>
         <td style="background-color: #008030;" class="title">
-          Your IP Address &nbsp;
-          <button onclick="copyText("ipAddr")">Copy</button>
+          Your IP Address
         </td>
       </tr>
       <tr>
         <td class="first last">
           <span class="big" id="ipAddr">{{ .RemoteAddr }}</span>
+          &nbsp;
+          <button onclick="copyText("ipAddr")">Copy</button>
+          <br>
+          <br>
+          <span class="big" id="port">Port: {{ .RemotePort }}</span>
+          &nbsp;
+          <button onclick="copyText("port")">Copy</button>
         </td>
       </tr>
     </table>
@@ -174,6 +195,7 @@ var indexTemplateString = `<!DOCTYPE html>
     <div>
     Addt'l Endpoints
     <li><a href="/ip">/ip</a></li>
+    <li><a href="/json">/json</a></li>
     </div>
   </main>
   <!-- footer -->

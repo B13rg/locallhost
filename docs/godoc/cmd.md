@@ -28,7 +28,15 @@ var RootCmd = &cobra.Command{
     Short: "Run locallhost server",
     Long:  `Start a server on a configured port that returns info about https requests.`,
     Run: func(cmd *cobra.Command, args []string) {
-        server.Serve(RootConfig.Port)
+        port := RootConfig.Port
+        if port <= 0 {
+            port = 8080
+            log.Warn().Msgf("Invalid port num %d, defaulting to %d", RootConfig.Port, port)
+        }
+
+        logInterfaces(port)
+
+        server.Serve(port)
     },
 }
 ```
@@ -78,7 +86,7 @@ func ConfigureLogger(debug bool)
 
 
 <a name="Execute"></a>
-## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L35>)
+## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L70>)
 
 ```go
 func Execute(ver string)
@@ -87,7 +95,7 @@ func Execute(ver string)
 Execute adds all child commands to the root command sets flags appropriately. This is called by main.main\(\). It only needs to happen once to the rootCmd.
 
 <a name="InitConfig"></a>
-## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L85>)
+## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L120>)
 
 ```go
 func InitConfig()
@@ -96,7 +104,7 @@ func InitConfig()
 InitConfig reads in config file and ENV variables if set.
 
 <a name="ProfilingFinalizer"></a>
-## func [ProfilingFinalizer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L101>)
+## func [ProfilingFinalizer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L136>)
 
 ```go
 func ProfilingFinalizer()
@@ -105,7 +113,7 @@ func ProfilingFinalizer()
 Stop profiling and write cpu and memory profiling files if configured.
 
 <a name="ProfilingInitializer"></a>
-## func [ProfilingInitializer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L126>)
+## func [ProfilingInitializer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L161>)
 
 ```go
 func ProfilingInitializer()
@@ -123,7 +131,7 @@ func SetupLogger(enableColor bool) zerolog.Logger
 Configure zerolog with some defaults and cleanup error formatting.
 
 <a name="CmdRootOptions"></a>
-## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L44-L57>)
+## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L79-L92>)
 
 Default options that are available to all commands.
 

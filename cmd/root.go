@@ -6,10 +6,12 @@ package cmd
 
 import (
 	"fmt"
+	"net"
 	"os"
 	"path/filepath"
 	"runtime"
 	"runtime/pprof"
+	"strings"
 
 	"github.com/b13rg/locallhost/pkg/server"
 	"github.com/rs/zerolog/log"
@@ -26,8 +28,41 @@ var RootCmd = &cobra.Command{
 	Short: "Run locallhost server",
 	Long:  `Start a server on a configured port that returns info about https requests.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		server.Serve(RootConfig.Port)
+		port := RootConfig.Port
+		if port <= 0 {
+			port = 8080
+			log.Warn().Msgf("Invalid port num %d, defaulting to %d", RootConfig.Port, port)
+		}
+
+		logInterfaces(port)
+
+		server.Serve(port)
 	},
+}
+
+// Log interfaces tool will be serving on
+func logInterfaces(port int) {
+
+	interfaces, err := net.Interfaces()
+	if err != nil {
+		log.Fatal().Err(err).Msg("error fetching interfaces")
+	}
+	log.Info().Msg("Serving locallhost on:")
+	for _, intface := range interfaces {
+		addrs, err := intface.Addrs()
+		if err != nil {
+			log.Warn().Err(err).Msg("error fetching interface addresses")
+		}
+		for _, addr := range addrs {
+			if strings.Contains(addr.String(), ":") {
+				// ipv6
+				log.Info().Msgf("  http://[%v]:%d", strings.Split(addr.String(), "/")[0], port)
+			} else {
+				// ipv4
+				log.Info().Msgf("  http://%v:%d", strings.Split(addr.String(), "/")[0], port)
+			}
+		}
+	}
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
