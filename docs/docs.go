@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	cmd "github.com/b13rg/template-golang/cmd"
+	cmd "github.com/b13rg/locallhost/cmd"
 	"github.com/invopop/jsonschema"
 	"github.com/princjef/gomarkdoc"
 	"github.com/princjef/gomarkdoc/lang"
@@ -57,7 +57,7 @@ func GenerateTypeSchemas() error {
 	}
 
 	reflector, err := GenerateReflector(
-		"github.com/b13rg/template-golang/pkg/types",
+		"github.com/b13rg/locallhost/pkg/types",
 		"../pkg/types",
 	)
 	if err != nil {
@@ -111,7 +111,7 @@ func GoMarkDoc() error {
 	}
 
 	repo := lang.Repo{
-		Remote:        "https://github.com:b13rg/template-golang",
+		Remote:        "https://github.com:b13rg/locallhost",
 		DefaultBranch: "main",
 		PathFromRoot:  "",
 	}
@@ -122,8 +122,8 @@ func GoMarkDoc() error {
 	}
 
 	docFiles := map[string]string{
-		"../cmd":       "tool-cmd.md",
-		"../pkg/types": "types.md",
+		"../cmd":        "cmd.md",
+		"../pkg/server": "server.md",
 		// "../pkg/jnetvm":           "kr8-jsonnet.md",
 		// "../pkg/kr8_cache":        "kr8-cache.md",
 		// "../pkg/kr8_types":        "kr8-types.md",
@@ -167,7 +167,8 @@ func main() {
 	if err := CopyRepoFiles(); err != nil {
 		log.Fatal().Err(err).Send()
 	}
-	if err := GenerateTypeSchemas(); err != nil {
-		log.Fatal().Err(err).Send()
-	}
+	// Skip
+	// if err := GenerateTypeSchemas(); err != nil {
+	// 	log.Fatal().Err(err).Send()
+	// }
 }
