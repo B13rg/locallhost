@@ -69,12 +69,12 @@
       font-size: 22px;
     }
 
-    .center {
-      text-align: center;
+    .last {
+      padding-bottom: 0.5em;
     }
 
-    .tmid {
-      margin: 0px auto;
+    .center {
+      text-align: center;
     }
 
     :link,
@@ -113,8 +113,7 @@
       <br>
       <a href="http://[::1]:80/">http://[::1]:80</a>
     </span>
-    <br>
-    <br>
+    <br><br>
 
     <span class="small">Or perhaps here:</span><br>
     <div class="big">
@@ -133,8 +132,8 @@
         </td>
       </tr>
       <tr>
-        <td style="padding-bottom: 0.5em;">
-          <span class="big" id="ipAddr">35.131.63.214</span>
+        <td class="last">
+          <span class="big" id="ipAddr">{{ .reqRemoteAddr }}</span>
         </td>
       </tr>
     </table>
@@ -148,14 +147,24 @@
         </td>
       </tr>
       <tr>
-        <td style="padding-bottom: 0.5em;" id="headers">
+        <td class="last" id="headers">
           <span>
-            GET / HTTP/1.1 <br>
-            {.key}: {.value}
+            {{ .reqMethod }} / {{ .reqProto }} <br>
+            {{range .header }}
+            ---
+            {{.key}}: {{.value}}
+            {{ end }}
           </span>
         </td>
       </tr>
     </table>
+    <br><br>
+    <details>
+    <summary>Other Endpoints</summary>
+    <div markdown="1">
+    * 
+    </div>
+  </details>
   </main>
   <!-- footer -->
   <footer>
@@ -166,7 +175,6 @@
       <br>
     </p>
   </footer>
-
 </body>
 
 </html>
