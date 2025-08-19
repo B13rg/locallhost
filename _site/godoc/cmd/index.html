@@ -113,6 +113,7 @@
                 <h1 id="cmd">cmd</h1>
 <pre><code class="language-go">import &quot;github.com/b13rg/locallhost/cmd&quot;
 </code></pre>
+<p>Defines the cli-interface commands available to the user.</p>
 <h2 id="index">Index</h2>
 <ul>
 <li><a href="#variables">Variables</a></li>
@@ -178,22 +179,22 @@
 <pre><code class="language-go">func ConfigureLogger(debug bool)
 </code></pre>
 <p><a name="Execute"></a></p>
-<h2 id="func-execute">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L70">Execute</a></h2>
+<h2 id="func-execute">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L68">Execute</a></h2>
 <pre><code class="language-go">func Execute(ver string)
 </code></pre>
 <p>Execute adds all child commands to the root command sets flags appropriately. This is called by main.main(). It only needs to happen once to the rootCmd.</p>
 <p><a name="InitConfig"></a></p>
-<h2 id="func-initconfig">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L120">InitConfig</a></h2>
+<h2 id="func-initconfig">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L119">InitConfig</a></h2>
 <pre><code class="language-go">func InitConfig()
 </code></pre>
 <p>InitConfig reads in config file and ENV variables if set.</p>
 <p><a name="ProfilingFinalizer"></a></p>
-<h2 id="func-profilingfinalizer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L136">ProfilingFinalizer</a></h2>
+<h2 id="func-profilingfinalizer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L135">ProfilingFinalizer</a></h2>
 <pre><code class="language-go">func ProfilingFinalizer()
 </code></pre>
 <p>Stop profiling and write cpu and memory profiling files if configured.</p>
 <p><a name="ProfilingInitializer"></a></p>
-<h2 id="func-profilinginitializer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L161">ProfilingInitializer</a></h2>
+<h2 id="func-profilinginitializer">func <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L160">ProfilingInitializer</a></h2>
 <pre><code class="language-go">func ProfilingInitializer()
 </code></pre>
 <p>Sets up program profiling.</p>
@@ -203,7 +204,7 @@
 </code></pre>
 <p>Configure zerolog with some defaults and cleanup error formatting.</p>
 <p><a name="CmdRootOptions"></a></p>
-<h2 id="type-cmdrootoptions">type <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L79-L92">CmdRootOptions</a></h2>
+<h2 id="type-cmdrootoptions">type <a href="https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L77-L90">CmdRootOptions</a></h2>
 <p>Default options that are available to all commands.</p>
 <pre><code class="language-go">type CmdRootOptions struct {
     // log more information about what the tool is doing. Overrides --loglevel

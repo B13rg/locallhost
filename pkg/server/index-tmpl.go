@@ -5,22 +5,23 @@ import "net/http"
 // Contains the data extracted from the request and returned to the user.
 type RequestResponse struct {
 	// IP address of the remote client
-	RemoteAddr string
+	RemoteAddr string `json:"remoteAddress"`
 	// Port of the remote client
-	RemotePort string
+	RemotePort string `json:"remotePort"`
 	// Host header
-	Host string
+	Host string `json:"host"`
 	// Request method
-	Method string
+	Method string `json:"method"`
 	// Request protocol
-	Proto string
+	Proto string `json:"protocol"`
 	// Request headers
-	Header http.Header
+	Header http.Header `json:"header"`
 }
 
-// Returns the html template string for the index page
+// Returns the html template string for the index page.
+//
+//nolint:funlen
 func IndexTemplateString() string {
-
 	cssStyle := `<style type="text/css">
     body {
       background-color: #121212;

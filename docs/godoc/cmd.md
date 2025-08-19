@@ -4,6 +4,8 @@
 import "github.com/b13rg/locallhost/cmd"
 ```
 
+Defines the cli\-interface commands available to the user.
+
 ## Index
 
 - [Variables](<#variables>)
@@ -86,7 +88,7 @@ func ConfigureLogger(debug bool)
 
 
 <a name="Execute"></a>
-## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L70>)
+## func [Execute](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L68>)
 
 ```go
 func Execute(ver string)
@@ -95,7 +97,7 @@ func Execute(ver string)
 Execute adds all child commands to the root command sets flags appropriately. This is called by main.main\(\). It only needs to happen once to the rootCmd.
 
 <a name="InitConfig"></a>
-## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L120>)
+## func [InitConfig](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L119>)
 
 ```go
 func InitConfig()
@@ -104,7 +106,7 @@ func InitConfig()
 InitConfig reads in config file and ENV variables if set.
 
 <a name="ProfilingFinalizer"></a>
-## func [ProfilingFinalizer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L136>)
+## func [ProfilingFinalizer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L135>)
 
 ```go
 func ProfilingFinalizer()
@@ -113,7 +115,7 @@ func ProfilingFinalizer()
 Stop profiling and write cpu and memory profiling files if configured.
 
 <a name="ProfilingInitializer"></a>
-## func [ProfilingInitializer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L161>)
+## func [ProfilingInitializer](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L160>)
 
 ```go
 func ProfilingInitializer()
@@ -131,7 +133,7 @@ func SetupLogger(enableColor bool) zerolog.Logger
 Configure zerolog with some defaults and cleanup error formatting.
 
 <a name="CmdRootOptions"></a>
-## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L79-L92>)
+## type [CmdRootOptions](<https://github.com:b13rg/locallhost/blob/main/cmd/root.go#L77-L90>)
 
 Default options that are available to all commands.
 

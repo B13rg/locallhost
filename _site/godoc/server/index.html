@@ -111,12 +111,12 @@
 <li><a href="#ExtractRequestData">func ExtractRequestData(req *http.Request) *RequestResponse</a></li>
 </ul>
 <p><a name="IndexTemplateString"></a></p>
-<h2 id="func-indextemplatestring">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L22">IndexTemplateString</a></h2>
+<h2 id="func-indextemplatestring">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L24">IndexTemplateString</a></h2>
 <pre><code class="language-go">func IndexTemplateString() string
 </code></pre>
-<p>Returns the html template string for the index page</p>
+<p>Returns the html template string for the index page.</p>
 <p><a name="Serve"></a></p>
-<h2 id="func-serve">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L75">Serve</a></h2>
+<h2 id="func-serve">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L76">Serve</a></h2>
 <pre><code class="language-go">func Serve(port int)
 </code></pre>
 <p>Start serving on specified port.</p>
@@ -125,21 +125,21 @@
 <p>Contains the data extracted from the request and returned to the user.</p>
 <pre><code class="language-go">type RequestResponse struct {
     // IP address of the remote client
-    RemoteAddr string
+    RemoteAddr string `json:&quot;remoteAddress&quot;`
     // Port of the remote client
-    RemotePort string
+    RemotePort string `json:&quot;remotePort&quot;`
     // Host header
-    Host string
+    Host string `json:&quot;host&quot;`
     // Request method
-    Method string
+    Method string `json:&quot;method&quot;`
     // Request protocol
-    Proto string
+    Proto string `json:&quot;protocol&quot;`
     // Request headers
-    Header http.Header
+    Header http.Header `json:&quot;header&quot;`
 }
 </code></pre>
 <p><a name="ExtractRequestData"></a></p>
-<h3 id="func-extractrequestdata">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L49">ExtractRequestData</a></h3>
+<h3 id="func-extractrequestdata">func <a href="https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L48">ExtractRequestData</a></h3>
 <pre><code class="language-go">func ExtractRequestData(req *http.Request) *RequestResponse
 </code></pre>
               

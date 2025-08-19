@@ -13,16 +13,16 @@ import "github.com/b13rg/locallhost/pkg/server"
 
 
 <a name="IndexTemplateString"></a>
-## func [IndexTemplateString](<https://github.com:b13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L22>)
+## func [IndexTemplateString](<https://github.com:b13rg/locallhost/blob/main/pkg/server/index-tmpl.go#L24>)
 
 ```go
 func IndexTemplateString() string
 ```
 
-Returns the html template string for the index page
+Returns the html template string for the index page.
 
 <a name="Serve"></a>
-## func [Serve](<https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L75>)
+## func [Serve](<https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L76>)
 
 ```go
 func Serve(port int)
@@ -38,22 +38,22 @@ Contains the data extracted from the request and returned to the user.
 ```go
 type RequestResponse struct {
     // IP address of the remote client
-    RemoteAddr string
+    RemoteAddr string `json:"remoteAddress"`
     // Port of the remote client
-    RemotePort string
+    RemotePort string `json:"remotePort"`
     // Host header
-    Host string
+    Host string `json:"host"`
     // Request method
-    Method string
+    Method string `json:"method"`
     // Request protocol
-    Proto string
+    Proto string `json:"protocol"`
     // Request headers
-    Header http.Header
+    Header http.Header `json:"header"`
 }
 ```
 
 <a name="ExtractRequestData"></a>
-### func [ExtractRequestData](<https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L49>)
+### func [ExtractRequestData](<https://github.com:b13rg/locallhost/blob/main/pkg/server/server.go#L48>)
 
 ```go
 func ExtractRequestData(req *http.Request) *RequestResponse

@@ -8,28 +8,27 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/rs/zerolog/log"
 )
 
-func respIndex(w http.ResponseWriter, req *http.Request) {
+func respIndex(writer http.ResponseWriter, req *http.Request) {
 	var tmplFile = "index.tmpl.html"
 	tmpl, err := template.New(tmplFile).Parse(IndexTemplateString())
 	if err != nil {
-		fmt.Fprintf(w, "Error parsing template: %v\n", err)
+		//nolint:errcheck
+		fmt.Fprintf(writer, "Error parsing template: %v\n", err)
+
 		return
 	}
 
 	reqData := ExtractRequestData(req)
 
-	err = tmpl.Execute(w, reqData)
+	err = tmpl.Execute(writer, reqData)
 	if err != nil {
-		fmt.Fprintf(w, "Error executing template: %v\n", err)
-		return
+		//nolint:errcheck
+		fmt.Fprintf(writer, "Error executing template: %v\n", err)
 	}
-	// for name, headers := range req.Header {
-	// 	for _, h := range headers {
-	// 		fmt.Fprintf(w, "%v: %v\n", name, h)
-	// 	}
-	// }
 }
 
 func parseAddress(remoteAddr string) (string, string) {
@@ -61,6 +60,7 @@ func ExtractRequestData(req *http.Request) *RequestResponse {
 
 func respIP(w http.ResponseWriter, req *http.Request) {
 	remoteAddr, _ := parseAddress(req.RemoteAddr)
+	//nolint:errcheck
 	fmt.Fprintf(w, "%v", remoteAddr)
 }
 
@@ -68,6 +68,7 @@ func respJson(w http.ResponseWriter, req *http.Request) {
 	data := ExtractRequestData(req)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+	//nolint:errcheck,gosec,errchkjson
 	json.NewEncoder(w).Encode(data)
 }
 
@@ -76,5 +77,7 @@ func Serve(port int) {
 	http.HandleFunc("/", respIndex)
 	http.HandleFunc("/ip", respIP)
 	http.HandleFunc("/json", respJson)
-	http.ListenAndServe(":"+strconv.Itoa(port), nil)
+
+	//nolint:gosec
+	log.Fatal().Err(http.ListenAndServe(":"+strconv.Itoa(port), nil)).Msg("Server encountered error")
 }
