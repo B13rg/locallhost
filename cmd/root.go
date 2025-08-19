@@ -25,7 +25,7 @@ var version string
 var RootCmd = &cobra.Command{
 	Use:   "locallhost",
 	Short: "Run locallhost server",
-	Long:  `Start a server on a configured port that returns info about https requests.`,
+	Long:  `Start a server on a configured port that returns info about http requests.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		port := RootConfig.Port
 		if port <= 0 {
