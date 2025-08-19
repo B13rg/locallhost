@@ -1,4 +1,4 @@
-module github.com/b13rg/template-golang
+module github.com/b13rg/locallhost
 
 go 1.24.2
 

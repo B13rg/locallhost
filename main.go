@@ -1,7 +1,7 @@
 // Purpose of package
 package main
 
-import "github.com/b13rg/template-golang/cmd"
+import "github.com/b13rg/locallhost/cmd"
 
 var version = "v0.0.1"
 
