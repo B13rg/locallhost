@@ -41,7 +41,7 @@ tasks:
       - b
     cmds:
       - go fmt
-      - go build
+      - go build -ldflags="-s -w"
       - task: 02_mkdocs
 
   02_mkdocs:

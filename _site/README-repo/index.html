@@ -51,12 +51,18 @@
     <li class="toctree-l2"><a class="reference internal" href="#technical-overview">Technical Overview</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#getting-started">Getting Started</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+        <ul>
     <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#natively">Natively</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#docker">Docker</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -64,13 +70,13 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#links">Links</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#history">History</a>
-    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#development">Development</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#contributing">Contributing</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
     </li>
@@ -126,14 +132,13 @@ Also provides links to localhost (<code>127.0.0.1</code>, <code>[::1]</code>) fo
   - [Key Features](#key-features)
   - [Technical Overview](#technical-overview)
   - [Installation](#installation)
-    - [Getting Started](#getting-started)
+  - [Getting Started](#getting-started)
     - [Configuration](#configuration)
     - [Deployment](#deployment)
   - [Documentation and Additional Resources](#documentation-and-additional-resources)
     - [Links](#links)
-    - [History](#history)
   - [Development](#development)
-  - [Contributing](#contributing)
+    - [Contributing](#contributing)
   - [License](#license)
 
 </p>
@@ -141,7 +146,13 @@ Also provides links to localhost (<code>127.0.0.1</code>, <code>[::1]</code>) fo
 
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li></li>
+<li>Show request IP address and port</li>
+<li><code>/ip</code> endpoint provides raw request IP address</li>
+<li>Show entire HTTP request header</li>
+<li><code>/json</code> endpoint provides request info formatted as JSON</li>
+<li>ipv4+ipv6 localhost links</li>
+<li>Quick links for port 80</li>
+<li>Customizable port number</li>
 </ul>
 <h2 id="technical-overview">Technical Overview</h2>
 <p>Uses Golang's <code>net/http</code> and `` packages to display request info.</p>
@@ -149,15 +160,55 @@ Also provides links to localhost (<code>127.0.0.1</code>, <code>[::1]</code>) fo
 <li></li>
 </ul>
 <h2 id="installation">Installation</h2>
-<h3 id="getting-started">Getting Started</h3>
+<pre><code>go install https://github.com/B13rg/locallhost.git@main
+</code></pre>
+<h2 id="getting-started">Getting Started</h2>
 <h3 id="configuration">Configuration</h3>
+<pre><code class="language-sh">❯ ./locallhost -h                                                                                                                         ─╯
+Start a server on a configured port that returns info about http requests.
+
+Usage:
+  locallhost [flags]
+  locallhost [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  version     Get version
+
+Flags:
+      --color               enable colorized output (default true)
+      --debug               log additional information about what the tool is doing. Overrides --loglevel
+  -h, --help                help for locallhost
+  -L, --loglevel string     set zerolog log level (default &quot;info&quot;)
+  -p, --port int            Set http port for server to listen on (default 8080)
+      --profiledir string   directory to write pprof profile data to
+
+Use &quot;locallhost [command] --help&quot; for more information about a command.
+</code></pre>
 <h3 id="deployment">Deployment</h3>
+<h4 id="natively">Natively</h4>
+<pre><code>go build ./locallhost
+./locallhost
+</code></pre>
+<h4 id="docker">Docker</h4>
+<pre><code>docker-compose -f ./docker/compose.yml build
+docker-compose -f ./docker/compose.yml up -d
+</code></pre>
 <h2 id="documentation-and-additional-resources">Documentation and Additional Resources</h2>
+<p>See <a href="">./docs</a> folder.
+Most if not all of the documentation is generated from the golang code.</p>
 <h3 id="links">Links</h3>
-<h3 id="history">History</h3>
+<ul>
+<li>Inspiration:</li>
+<li>https://locallhost.com</li>
+</ul>
 <h2 id="development">Development</h2>
-<h2 id="contributing">Contributing</h2>
+<p>Uses Golang <code>1.24.2</code>.</p>
+<h3 id="contributing">Contributing</h3>
+<p>Open an issue or PR.</p>
 <h2 id="license">License</h2>
+<p><a href="../LICENSE">MIT</a></p>
               
             </div>
           </div><footer>

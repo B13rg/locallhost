@@ -4,7 +4,7 @@ Run locallhost server
 
 ### Synopsis
 
-Start a server on a configured port that returns info about https requests.
+Start a server on a configured port that returns info about http requests.
 
 ```
 locallhost [flags]
