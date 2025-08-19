@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+package server
+
+var IndexTemplateString = `<!DOCTYPE html>
 <!-- Based on http://locallhost.com/ - &copy; 2004-2025 Tom Anderson-->
 <html>
 
@@ -85,13 +87,13 @@
   </style>
   <script>
     function genLink() {
-      const port = document.getElementById('portInput').value;
-      const linkTextV4 = `http://127.0.0.1:${port}`;
-      const linkTextV6 = `http://[::1]:${port}`;
-      document.getElementById('linkResult').innerHTML =
-        `<a href="${linkTextV4}" target="_blank" style="color: #00db54;">${linkTextV4}</a>
+      const port = document.getElementById("portInput").value;
+      const linkTextV4 = "http://127.0.0.1:${port}";
+      const linkTextV6 = "http://[::1]:${port}";
+      document.getElementById("linkResult").innerHTML =
+        "<a href="${linkTextV4}" target="_blank" style="color: #00db54;">${linkTextV4}</a>
         <br>
-        <a href="${linkTextV6}" target="_blank" style="color: #00db54;">${linkTextV6}</a>`;
+        <a href="${linkTextV6}" target="_blank" style="color: #00db54;">${linkTextV6}</a>";
     }
     function copyText(elementID) {
       // Get the text field
@@ -128,7 +130,7 @@
       <tr>
         <td style="background-color: #008030;" class="title">
           Your IP Address &nbsp;
-          <button onclick="copyText('ipAddr')">Copy</button>
+          <button onclick="copyText("ipAddr")">Copy</button>
         </td>
       </tr>
       <tr>
@@ -143,7 +145,7 @@
       <tr>
         <td style="background-color: #0040b0;" class="title">
           Your HTTP Request Header &nbsp;
-          <button onclick="copyText('headers')">Copy</button>
+          <button onclick="copyText("headers")">Copy</button>
         </td>
       </tr>
       <tr>
@@ -176,4 +178,4 @@
   </footer>
 </body>
 
-</html>
+</html>`
