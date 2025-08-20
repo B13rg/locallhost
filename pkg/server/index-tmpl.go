@@ -34,7 +34,6 @@ func IndexTemplateString() string {
 
     a {
       color: #81d4fa;
-      /* Light blue for links */
       text-decoration: none;
     }
 
@@ -76,31 +75,14 @@ func IndexTemplateString() string {
       color: white
     }
 
-    .small {
-      font-size: 11px;
-    }
+    .small { font-size: 11px; }
+    .big { font-size: 22px; }
 
-    .big {
-      font-size: 22px;
-    }
-    .first {
-      padding-top: 0.5em;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-    }
-    .last {
-      padding-bottom: 0.5em;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-    }
+    .first { padding: 0.5em 0.5em 0 0.5em; }
+    .last { padding: 0 0.5em 0.5em 0.5em; }
 
-    .center {
-      text-align: center;
-    }
-    
-    .left {
-      text-align: left;
-    }
+    .center { text-align: center; }    
+    .left { text-align: left; }
 
     :link,
     :visited {
@@ -116,7 +98,7 @@ func IndexTemplateString() string {
       const linkTextV6 = "http://[::1]:"+port;
       document.getElementById("linkResult").innerHTML =
         '<a href="'+linkTextV4+'" target="_blank" style="color: #00db54;">'+linkTextV4+'</a><br>'+
-        '<a href="${linkTextV6}" target="_blank" style="color: #00db54;">'+linkTextV6+'</a>';
+        '<a href="'+linkTextV6+'" target="_blank" style="color: #00db54;">'+linkTextV6+'</a>';
     }
     function copyText(elementID) {
       // Get the text field
