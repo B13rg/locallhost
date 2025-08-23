@@ -32,13 +32,15 @@ func IndexTemplateString() string {
       text-align: center;
     }
 
-    a {
-      color: #81d4fa;
-      text-decoration: none;
-    }
-
     a:hover {
       text-decoration: underline;
+    }
+
+    a,
+    :link,
+    :visited {
+      text-decoration: none;
+      color: #81d4fa
     }
 
     input,
@@ -83,12 +85,6 @@ func IndexTemplateString() string {
 
     .center { text-align: center; }    
     .left { text-align: left; }
-
-    :link,
-    :visited {
-      text-decoration: none;
-      color: #81d4fa
-    }
   </style>`
 
 	javaScript := `<script>
