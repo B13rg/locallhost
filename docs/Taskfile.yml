@@ -10,7 +10,7 @@ tasks:
       - task: build
 
   01_setup:
-    desc: 'Instal dev tools'
+    desc: 'Install dev tools'
     aliases:
       - setup
       - s
@@ -21,6 +21,15 @@ tasks:
       - pip install --user mkdocs
       # parse profiling data
       - go install github.com/google/pprof@latest
+  
+  01_setup_goreleaser:
+    desc: 'Install goreleaser and child tools'
+    cmds:
+      - brew install goreleaser
+      # cataloging artifacts
+      - brew install syft
+      # signing artifacts
+      # - brew install cosign
 
 
   03_test-go:
@@ -59,7 +68,7 @@ tasks:
       - bs
     cmds:
       - go generate ./docs
-      - goreleaser release --snapshot --clean --skip=homebrew,docker
+      - goreleaser release --snapshot --clean --skip=homebrew
 
   04_profile-generate:
     desc: Capture profiling data from a tool generate of the examples.
