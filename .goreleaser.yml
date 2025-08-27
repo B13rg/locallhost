@@ -28,7 +28,6 @@ sboms:
 dockers:
   # https://goreleaser.com/customization/docker/
   - image_templates:
-      - b13rg/locallhost:latest
       - ghcr.io/b13rg/locallhost:latest
     dockerfile: "docker/Dockerfile-goreleaser"
 
