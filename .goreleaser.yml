@@ -29,6 +29,7 @@ dockers:
   # https://goreleaser.com/customization/docker/
   - image_templates:
       - ghcr.io/b13rg/locallhost:latest
+      - ghcr.io/b13rg/locallhost:{{ .Tag }}
     dockerfile: "docker/Dockerfile-goreleaser"
 
 
