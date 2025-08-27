@@ -45,8 +45,18 @@ func parseAddress(remoteAddr string) (string, string) {
 	return retAddr, retPort
 }
 
+func getRemoteAddr(req *http.Request) string {
+	addr := req.RemoteAddr
+	xForwardFor := req.Header.Get("X-FORWARDED-FOR")
+	if xForwardFor != "" {
+		addr = strings.Split(xForwardFor, ",")[0]
+	}
+
+	return addr
+}
+
 func ExtractRequestData(req *http.Request) *RequestResponse {
-	remoteAddr, remotePort := parseAddress(req.RemoteAddr)
+	remoteAddr, remotePort := parseAddress(getRemoteAddr(req))
 
 	return &RequestResponse{
 		RemoteAddr: remoteAddr,
@@ -59,7 +69,7 @@ func ExtractRequestData(req *http.Request) *RequestResponse {
 }
 
 func respIP(w http.ResponseWriter, req *http.Request) {
-	remoteAddr, _ := parseAddress(req.RemoteAddr)
+	remoteAddr, _ := parseAddress(getRemoteAddr(req))
 	//nolint:errcheck
 	fmt.Fprintf(w, "%v", remoteAddr)
 }

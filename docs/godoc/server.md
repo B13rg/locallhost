@@ -22,7 +22,7 @@ func IndexTemplateString() string
 Returns the html template string for the index page.
 
 <a name="Serve"></a>
-## func [Serve](<https://github.com:B13rg/locallhost/blob/main/pkg/server/server.go#L76>)
+## func [Serve](<https://github.com:B13rg/locallhost/blob/main/pkg/server/server.go#L86>)
 
 ```go
 func Serve(port int) error
@@ -53,7 +53,7 @@ type RequestResponse struct {
 ```
 
 <a name="ExtractRequestData"></a>
-### func [ExtractRequestData](<https://github.com:B13rg/locallhost/blob/main/pkg/server/server.go#L48>)
+### func [ExtractRequestData](<https://github.com:B13rg/locallhost/blob/main/pkg/server/server.go#L58>)
 
 ```go
 func ExtractRequestData(req *http.Request) *RequestResponse
