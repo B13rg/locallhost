@@ -19,24 +19,29 @@ archives:
     files:
     - LICENSE*
     - README*
-    - CHANGELOG*
-    - scripts/*
     - docs/*
 snapshot:
   version_template: SNAPSHOT-{{ .Commit }}
 dist: dist
 sboms:
   - artifacts: archive
+dockers:
+  # https://goreleaser.com/customization/docker/
+  - image_templates:
+      - b13rg/locallhost:latest
+      - ghcr.io/b13rg/locallhost:latest
+    dockerfile: "docker/Dockerfile-goreleaser"
+
 
 #
 # ---
 #
 # nfpms:
 #   -
-#     vendor: 'Iceberg Tech'
-#     homepage: "https://github.com/ice-bergtech/kr8"
-#     maintainer: 'Iceberg Tech LLC'
-#     description: "An opinionated configuration management tool for Kubernetes Cluster"
+#     vendor: ''
+#     homepage: ""
+#     maintainer: ''
+#     description: ""
 #     license: MIT
 #     formats:
 #       - rpm
@@ -46,16 +51,16 @@ sboms:
 #
 # ---
 
-signs:
-  - cmd: cosign
-    certificate: "${artifact}.pem"
-    artifacts: checksum
-    args:
-      - sign-blob
-      - "--output-certificate=${certificate}"
-      - "--output-signature=${signature}"
-      - "${artifact}"
-      - "--yes"
+# signs:
+#   - cmd: cosign
+#     certificate: "${artifact}.pem"
+#     artifacts: checksum
+#     args:
+#       - sign-blob
+#       - "--output-certificate=${certificate}"
+#       - "--output-signature=${signature}"
+#       - "${artifact}"
+#       - "--yes"
 #
 # ---
 #
