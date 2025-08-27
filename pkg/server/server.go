@@ -47,9 +47,9 @@ func parseAddress(remoteAddr string) (string, string) {
 
 func getRemoteAddr(req *http.Request) string {
 	addr := req.RemoteAddr
-	xForwardFor := req.Header.Get("X-FORWARDED-FOR")
+	xForwardFor := req.Header.Get("X-Forwarded-For")
 	if xForwardFor != "" {
-		addr = strings.Split(xForwardFor, ",")[0]
+		addr = strings.Split(xForwardFor, ",")[0] + ":?"
 	}
 
 	return addr
